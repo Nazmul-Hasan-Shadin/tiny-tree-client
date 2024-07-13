@@ -7,23 +7,20 @@ import ProductCard from "../ui/productCard";
 import Container from "@/container/Container";
 import { FaFilter } from "react-icons/fa";
 import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
+import Search from "../ui/search/Search";
 
 const Products = () => {
   const [page, setPage] = useState(1);
+  const [searchFilter,setSearchFilter]=useState(false)
   const { data: productData, isLoading, error } = useGetAllProductQuery(page);
 
 
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   getAllProduct(null);
-  // }, [getAllProduct]);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  console.log(productData);
 
   if (error) {
     return <div>Error fetching products</div>;
@@ -37,17 +34,29 @@ const Products = () => {
     setPage(page - 1);
   };
 
+  const handleSearchToggle=()=>{
+       setSearchFilter(!searchFilter)
+  } 
+
   return (
     <Container>
       <div>
-        <div className="flex justify-between  my-8">
+        <div className="flex justify-between relative  my-8 w-12/12 h-full">
           <h2 className="text-4xl text-primary-green font-bold pl-11">
             Our Products
           </h2>
-          <FaFilter className="text-3xl text-primary-green font-bold" />
+          <FaFilter onClick={handleSearchToggle}  className="text-3xl text-primary-green font-bold" />
+          {
+            searchFilter && (
+              <div className="absolute w-full z-10   top-16">
+                <Search></Search>
+              </div>
+            )
+          }
+        
         </div>
 
-        <div className="grid grid-cols-3 justify-items-center ">
+        <div className={`grid grid-cols-3 justify-items-center `}>
           {productData?.data?.map((product) => (
             <ProductCard product={product} key={product?._id} />
           ))}
