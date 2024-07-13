@@ -3,7 +3,7 @@ import imaged from "../../assets";
 
 const CategoryCard = ({ category }) => {
   const { image, name } = category;
-  console.log(category);
+
 
   return (
     <div className="flex flex-col justify-center space-y-2">
