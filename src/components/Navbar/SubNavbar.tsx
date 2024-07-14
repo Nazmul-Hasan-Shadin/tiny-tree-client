@@ -10,6 +10,7 @@ const SubNavbar = ({ setShowNav, showNav }) => {
         <li className="p-2 md:p-0 md:bg-none ">Home</li>
       </NavLink>
        <Link to={'/'}><li className=" p-2 md:p-0 md:bg-none ">Shop</li></Link>
+       <Link to={'/cart'}>  <li className=" p-2 md:p-0 md:bg-none ">Cart</li></Link>
    <Link to={'/products'}>   <li className=" p-2 md:p-0 md:bg-none ">Products</li></Link>
     <Link to={'/dashboard'}>  <li className=" p-2 md:p-0 md:bg-none ">Dashboard</li></Link>
     </>

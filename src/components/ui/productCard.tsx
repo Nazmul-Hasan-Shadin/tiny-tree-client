@@ -1,9 +1,19 @@
 import React from "react";
 import Button from "./Button/Button";
+import { useAppDispatch } from "@/redux/hook";
+import { addToCart } from "@/redux/feature/cart/cartSlice";
 
 const ProductCard = ({ product }) => {
   const { image, category, price, rating, quantity, description, title } =
     product;
+       
+    const dispatch= useAppDispatch()
+
+    const handleAddToCart=()=>{
+        dispatch(addToCart(product))
+    }
+
+
   return (
     <div className=" w-full h-full py-5 flex justify-center items-center">
       <div className="relative pl-1 bg-gray-200 flex justify-center rounded-xl hover:scale-105 duration-500 transform transition cursor-pointer">
@@ -63,7 +73,7 @@ const ProductCard = ({ product }) => {
             </p>
 
             <div className="flex justify-between">
-             <Button className="bg-[#1e531d] " name="Add To Cart"/>
+             <Button  onClick={handleAddToCart}  className="bg-[#1e531d] " name="Add To Cart"/>
 
              <Button name="Details" className="border-green-500 text-black"/>
             </div>

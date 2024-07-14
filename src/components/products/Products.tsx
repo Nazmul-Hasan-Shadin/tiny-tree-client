@@ -62,7 +62,7 @@ const Products = () => {
         </div>
 
         <div
-          className={`grid grid-cols-3 justify-items-center ${
+          className={`grid grid-cols-1  md:grid-cols-3 justify-items-center ${
             filterToggle ? "mt-28" : "mt-0"
           }`}
         >
