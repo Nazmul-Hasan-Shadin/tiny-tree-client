@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button/Button";
 
 const ProductCard = ({ product }) => {
   const { image, category, price, rating, quantity, description, title } =
@@ -62,13 +63,9 @@ const ProductCard = ({ product }) => {
             </p>
 
             <div className="flex justify-between">
-              <button className="inset-x-0 bottom-0 flex justify-center bg-[#1e531d] font-bold hover:bg-white text-sm md:text-base border hover:border-2 hover:border-blue-500 rounded-xl w-14 md:w-24 p-1 text-gray-100 hover:text-blue-900">
-                Add to cart
-              </button>
+             <Button className="bg-[#1e531d] " name="Add To Cart"/>
 
-              <button className="inset-x-0 bottom-0 text-slate-950 flex justify-center  font-bold hover:bg-white text-sm md:text-base  border-2 border-green-500 rounded-xl w-14 md:w-24 p-1  hover:text-blue-900 ">
-                Details
-              </button>
+             <Button name="Details" className="border-green-500 text-black"/>
             </div>
           </div>
         </div>

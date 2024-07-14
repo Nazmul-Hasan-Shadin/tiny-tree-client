@@ -1,23 +1,37 @@
+import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
+import { useState } from "react";
 
+const Search = ({setFilter}) => {
+  const [category, setCategory] = useState("");
+  const [priceRange, setPriceRange] = useState('');
+  console.log(priceRange);
 
-const Search = () => {
+  console.log(category);
+
+  const handleSearchFilter=()=>{
+    setFilter({priceRange,category})
+  }
+
 
   return (
     // style={{boxShadow: '2px 5px 5px 0px rgba(0,0,0,0.75)'}}
-    <div >
-      <div   className="flex  border-2 justify-around bg-[#fff]  p-8   shadow-x ">
+    <div>
+      <div className="flex  border-2 justify-around bg-[#fff]  p-8   shadow-x ">
         <div className="flex-1">
-          <select className="select select-bordered select-sm  w-full max-w-xs ">
+          <select
+            onChange={(e) => setCategory(e.target.value)}
+            className="select select-bordered select-sm  w-full max-w-xs "
+          >
             <option disabled selected>
               select categories
             </option>
-            <option>Small Apple</option>
-            <option>Small Orange</option>
-            <option>Small Tomato</option>
+            <option> orange </option>
+            <option>electronics</option>
+            <option> mal</option>
           </select>
         </div>
-        <div  className="flex-1">
-        <select className="select select-bordered select-sm w-full max-w-xs">
+        <div className="flex-1">
+          <select className="select select-bordered select-sm w-full max-w-xs">
             <option disabled selected>
               price range
             </option>
@@ -26,17 +40,22 @@ const Search = () => {
             <option>Small Tomato</option>
           </select>
         </div>
-        <div  className="flex-1">
-        <select className="select select-bordered select-sm w-full max-w-xs">
+        <div className="flex-1">
+          <select className="select select-bordered select-sm w-full max-w-xs">
             <option disabled selected>
-              coming soon
+              sort
             </option>
             <option>Small Apple</option>
             <option>Small Orange</option>
             <option>Small Tomato</option>
           </select>
         </div>
+        <div className="flex-1">
+          <button onClick={handleSearchFilter} className="btn btn-primary">Apply Filters</button>
+        </div>
       </div>
+
+  
     </div>
   );
 };
