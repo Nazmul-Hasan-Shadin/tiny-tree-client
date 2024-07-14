@@ -5,6 +5,16 @@ import { useAppSelector } from "@/redux/hook";
 const Cart = () => {
 
     const cartProducts = useAppSelector((state) => state.cart.products);
+
+    const price= cartProducts.reduce((accumalator,product)=>{
+        if (product.price && product.quantity) {
+            return accumalator + (product.price * product.quantity);
+
+        }
+         return accumalator
+    },0)
+  
+    
     return (
 <div className="container mx-auto mt-10">
   <div className="sm:flex shadow-md my-10">
@@ -66,7 +76,7 @@ const Cart = () => {
       <div className="border-t mt-8">
         <div className="flex font-semibold justify-between py-6 text-sm uppercase">
           <span>Total cost</span>
-          <span>$600</span>
+          <span>${price}</span>
         </div>
         <button className="bg-primary-green font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
               Checkout
