@@ -1,5 +1,9 @@
-import { useUpdateProductMutation } from "@/redux/feature/product/productApi";
+import {
+  useCreateProductMutation,
+  useUpdateProductMutation,
+} from "@/redux/feature/product/productApi";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 interface Inputs {
   image: string;
@@ -7,23 +11,45 @@ interface Inputs {
   price: number;
   quantity: number;
   rating: number;
+  description:string;
   category: string;
 }
 
-const UpdateProductForm = ({ product }) => {
-    
+type Product= {
+  _id?: string;
+  image: string;
+  description:string;
+  title: string;
+  price: number;
+  quantity: number;
+  rating: number;
+  category: string;
+}
 
-  const { _id,image, title, price, quantity, rating, category } = product;
-  console.log(_id);
+interface UpdateProductFormProps {
+  product?: Product;
+  isUpdate: boolean;
+}
+const UpdateProductForm= ({ product, isUpdate }:UpdateProductFormProps) => {
+  console.log(isUpdate);
   
+
+
+ 
+
   const { register, handleSubmit } = useForm<Inputs>();
-  const [UpdateProduct]=useUpdateProductMutation()
+  const [UpdateProduct] = useUpdateProductMutation();
+  const [addProduct] = useCreateProductMutation();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    if (isUpdate && product?._id) {
+       const _id=product._id
 
-    UpdateProduct({_id,data})
-
+      UpdateProduct({ _id, data });
+      toast.success("Succesfully product has updated");
+    }else{
+      addProduct(data)
+    }
   };
 
   return (
@@ -37,7 +63,7 @@ const UpdateProductForm = ({ product }) => {
               <input
                 type="text"
                 {...register("image")}
-                defaultValue={image}
+                defaultValue={isUpdate ? product?.image : ""}
                 className="grow"
                 placeholder="daisy@site.com"
               />
@@ -49,7 +75,7 @@ const UpdateProductForm = ({ product }) => {
               <input
                 type="text"
                 {...register("title")}
-                defaultValue={title}
+                defaultValue={isUpdate ? product?.title : ""}
                 className="grow"
                 placeholder="daisy@site.com"
               />
@@ -61,7 +87,7 @@ const UpdateProductForm = ({ product }) => {
               <input
                 type="text"
                 {...register("price")}
-                defaultValue={price}
+                defaultValue={isUpdate? product?.price : ""}
                 className="grow"
                 placeholder="daisy@site.com"
               />
@@ -73,7 +99,7 @@ const UpdateProductForm = ({ product }) => {
               <input
                 type="text"
                 {...register("quantity")}
-                defaultValue={quantity}
+                defaultValue={isUpdate? product?.quantity : ""}
                 className="grow"
                 placeholder="daisy@site.com"
               />
@@ -84,8 +110,20 @@ const UpdateProductForm = ({ product }) => {
               rating
               <input
                 type="text"
-                defaultValue={rating}
+                defaultValue={isUpdate? product?.rating : ""}
                 {...register("rating")}
+                className="grow"
+                placeholder="daisy@site.com"
+              />
+            </label>
+          </div>
+          <div>
+            <label className="input input-bordered flex items-center gap-2">
+              description
+              <input
+                type="text"
+                defaultValue={isUpdate? product?.description : ""}
+                {...register("description")}
                 className="grow"
                 placeholder="daisy@site.com"
               />
@@ -100,7 +138,7 @@ const UpdateProductForm = ({ product }) => {
               {...register("category")}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             >
-              <option> {category} </option>
+              <option> {isUpdate? product?.category : ""} </option>
               <option> Fruit </option>
               <option>Flower</option>
               <option> Tree </option>

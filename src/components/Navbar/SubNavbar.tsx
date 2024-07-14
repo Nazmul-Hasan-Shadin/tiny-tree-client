@@ -2,7 +2,19 @@ import React, { useState } from "react";
 import { MdCancel } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
 import "./subnavAnimation.css";
+import { Link, NavLink } from "react-router-dom";
 const SubNavbar = ({ setShowNav, showNav }) => {
+  const links = (
+    <>
+      <NavLink to={'/'}>
+        <li className="p-2 md:p-0 md:bg-none ">Home</li>
+      </NavLink>
+       <Link to={'/'}><li className=" p-2 md:p-0 md:bg-none ">Shop</li></Link>
+   <Link to={'/products'}>   <li className=" p-2 md:p-0 md:bg-none ">Products</li></Link>
+    <Link to={'/dashboard'}>  <li className=" p-2 md:p-0 md:bg-none ">Dashboard</li></Link>
+    </>
+  );
+
   return (
     <div
       className={`  fixed top-0  h-full w-11/12 md:w-  md:pb-3 md:pt-2 md:relative   font-bold  z-20 bg-[#fff]   ${
@@ -24,10 +36,7 @@ const SubNavbar = ({ setShowNav, showNav }) => {
             onClick={() => setShowNav(!showNav)}
             className={`absolute lg:hidden right-3 top-5 text-xl   `}
           />
-          <li className="p-2 md:p-0 md:bg-none ">Home</li>
-          <li className=" p-2 md:p-0 md:bg-none ">Shop</li>
-          <li className=" p-2 md:p-0 md:bg-none ">Products</li>
-          <li className=" p-2 md:p-0 md:bg-none ">About</li>
+          {links}
         </ul>
       </div>
     </div>

@@ -4,8 +4,6 @@ const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProduct: builder.query({
       query: ({ page, searchTerm = "", category = "", priceRange = "" }) => {
-   
-
         return {
           url: `/products`,
           method: "GET",
@@ -17,7 +15,7 @@ const authApi = baseApi.injectEndpoints({
 
     createProduct: builder.mutation({
       query: (productInfo) => ({
-        url: "/create-products",
+        url: "/create-product",
         method: "POST",
         body: productInfo,
       }),
@@ -25,21 +23,30 @@ const authApi = baseApi.injectEndpoints({
 
     updateProduct: builder.mutation({
       query: ({ _id, data }) => {
-      
-        
-        return{
+        return {
           url: `/update-product/${_id}`,
           method: "PATCH",
           body: data,
-        }
+        };
       },
-      invalidatesTags:["products"]
+      invalidatesTags: ["products"],
     }),
     getProductById: builder.query({
       query: (productId) => ({
         url: `/products/${productId}`,
         method: "GET",
       }),
+    }),
+    deleteProduct: builder.mutation({
+      query: (id) => {
+        console.log(id);
+        
+        return {
+          url: `/delete-product/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags:["products"]
     }),
   }),
 });
@@ -49,4 +56,5 @@ export const {
   useGetAllProductQuery,
   useUpdateProductMutation,
   useGetProductByIdQuery,
+  useDeleteProductMutation
 } = authApi;

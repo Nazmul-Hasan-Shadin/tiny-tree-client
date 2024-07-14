@@ -1,5 +1,6 @@
 import { useState } from "react";
 import UpdateProductForm from "../form/UpdateProduct/UpdateProductForm";
+import { FaEdit } from "react-icons/fa";
 
 
 const Modal = ({product}) => {
@@ -16,7 +17,8 @@ const Modal = ({product}) => {
   return (
     <div>
      {/* You can open the modal using document.getElementById('ID').showModal() method */}
-     <button className="btn" onClick={openModal}>Open Modal</button>
+     
+      <FaEdit className="text-2xl" onClick={openModal}></FaEdit>
       {isOpen && (
         <dialog id="my_modal_4" className="modal" open>
           <div className="modal-box w-11/12 max-w-5xl">
@@ -24,7 +26,7 @@ const Modal = ({product}) => {
             <p className="py-4">Click the button below to close</p>
 
 
-         <UpdateProductForm product={product}></UpdateProductForm>
+         <UpdateProductForm  isUpdate={true} product={product}></UpdateProductForm>
 
 
 
