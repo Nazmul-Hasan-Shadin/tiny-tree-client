@@ -3,6 +3,7 @@ import UpdateProductForm from "@/components/form/UpdateProduct/UpdateProductForm
 import Dashboard from "@/components/layout/Dashboard";
 
 import MainLayout from "@/components/layout/MainLayout";
+import Products from "@/components/products/Products";
 import Cart from "@/pages/Cart/Cart";
 
 import ProductManagement from "@/pages/Dashboard/ProductManagement/ProductManagement";
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <App></App>,
+      },
+      {
+        path: "products",
+        element: <Products/>,
       },
       {
         path: "cart",

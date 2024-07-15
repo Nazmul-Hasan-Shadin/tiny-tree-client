@@ -1,17 +1,33 @@
 import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Button from "../Button/Button";
+import { useAppDispatch } from "@/redux/hook";
+import { setFilter } from "@/redux/feature/product/productSlice";
 
-const Search = ({ setFilter }) => {
+
+const debounce=(func,deley)=>{
+  let timer;
+return (...arg)=>{
+   clearTimeout(timer)
+   timer=setTimeout(()=>func(...arg),deley)
+}
+}
+
+const Search = ( ) => {
   const [category, setCategory] = useState("");
-  const [priceRange, setPriceRange] = useState("");
-  console.log(priceRange);
+  const [sort, setSort] = useState("");
+  const [priceRange,setPriceRange]=useState('')
+  
+      
+  const dispatch=useAppDispatch()
 
-  console.log(category);
 
-  const handleSearchFilter = () => {
-    setFilter({ priceRange, category });
-  };
+  const handleSearchFilter = useCallback(
+    debounce(() => {
+      dispatch(setFilter({ category, sort ,priceRange}));
+    }, 400),
+    [category, sort, dispatch]
+  );
 
   return (
     // style={{boxShadow: '2px 5px 5px 0px rgba(0,0,0,0.75)'}}
@@ -31,23 +47,23 @@ const Search = ({ setFilter }) => {
           </select>
         </div>
         <div className="w-full">
-          <select className="select h-[38px] select-bordered select-sm w-full max-w-xs">
+          <select  className="select h-[38px] select-bordered select-sm w-full max-w-xs">
             <option disabled selected>
               price range
             </option>
-            <option>Small Apple</option>
+            <option >Small Apple</option>
             <option>Small Orange</option>
             <option>Small Tomato</option>
           </select>
         </div>
         <div className="w-full">
-          <select className="select h-[38px] select-bordered select-sm w-full max-w-xs">
+          <select  onChange={(e) => setSort(e.target.value)} className="select h-[38px] select-bordered select-sm w-full max-w-xs">
             <option disabled selected>
               sort
             </option>
-            <option>Small Apple</option>
-            <option>Small Orange</option>
-            <option>Small Tomato</option>
+            <option value={"priceLowToHigh"} > price low to high </option>
+            <option value={"priceHighToLow"}>price High to low</option>
+           
           </select>
         </div>
         <div className="w-full flex justify-end" >

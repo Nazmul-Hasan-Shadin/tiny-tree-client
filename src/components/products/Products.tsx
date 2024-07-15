@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 
 import React, { useEffect, useState } from "react";
 import ProductCard from "../ui/productCard";
@@ -12,13 +12,17 @@ import "./search.css";
 const Products = () => {
   const [page, setPage] = useState(1);
   const [filterToggle, setFilterToggle] = useState(false);
-  const [filter, setFilter] = useState({ priceRange: "", category: "" });
-
+  // const [filter, setFilter] = useState({ priceRange: "", category: "" });
+  const filterState = useAppSelector((state) =>state.filter);
+ console.log(filterState);
+ 
   const {
     data: productData,
     isLoading,
     error,
-  } = useGetAllProductQuery({ page, ...filter });
+  } = useGetAllProductQuery({ page, ...filterState });
+
+
 
   const dispatch = useAppDispatch();
 
@@ -27,6 +31,8 @@ const Products = () => {
   }
 
   if (error) {
+    console.log(error);
+
     return <div>Error fetching products</div>;
   }
 
@@ -50,7 +56,10 @@ const Products = () => {
             Our Products
           </h2>
           {filterToggle ? (
-            <MdCancel className="text-4xl text-red-700"   onClick={handleSearchToggle} />
+            <MdCancel
+              className="text-4xl text-red-700"
+              onClick={handleSearchToggle}
+            />
           ) : (
             <FaFilter
               onClick={handleSearchToggle}
@@ -64,7 +73,7 @@ const Products = () => {
                 filterToggle ? "slideDown" : ""
               } absolute w-full z-10   top-16`}
             >
-              <Search setFilter={setFilter} />
+              <Search  />
             </div>
           )}
         </div>
