@@ -14,7 +14,7 @@ const ProductManagement = () => {
         </div>
 
         <Link to={"/dashboard/add-product"}>
-          <button className="btn text-white text-xs lg:text-xl  lg:px-10 bg-[#FF9F43]">
+          <button className="btn text-white text-xs lg:text-xl  lg:px-10 bg-primary-green">
         
             <FaPlus /> Add Product
           </button>
@@ -32,7 +32,7 @@ const ProductManagement = () => {
           </div>
         </form>
 
-        <Link to={"/dashboard/addproduct-final"}>
+        <Link to={""}>
           <span className="text-xl lg:text-2xl  flex gap-1 lg:gap-3 py-3">
             <FaPrint className="text-green-500 flex "></FaPrint>
             <FaFilePdf className="text-red-700"></FaFilePdf>

@@ -2,6 +2,7 @@ import React from "react";
 import Button from "./Button/Button";
 import { useAppDispatch } from "@/redux/hook";
 import { addToCart } from "@/redux/feature/cart/cartSlice";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { image, category, price, rating, quantity, description, title } =
@@ -26,7 +27,7 @@ const ProductCard = ({ product }) => {
           <div className="relative">
             {/* <!-- :src="image.largeImageURL"     --> */}
             <img
-              src="https://cdn.pixabay.com/photo/2010/12/13/10/05/berries-2277_640.jpg"
+              src={image}
               className="max-h-60 object-cover rounded-t-xl"
               alt=""
             />
@@ -75,7 +76,7 @@ const ProductCard = ({ product }) => {
             <div className="flex justify-between">
              <Button  onClick={handleAddToCart}  className="bg-[#1e531d] " name="Add To Cart"/>
 
-             <Button name="Details" className="border-green-500 text-black"/>
+            <Link to={`/productDetails/${product._id}`}> <Button  name="Details" className="border-green-500 text-black"/></Link>
             </div>
           </div>
         </div>

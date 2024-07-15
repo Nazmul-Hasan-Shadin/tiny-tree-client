@@ -18,7 +18,7 @@ const Modal = ({product}) => {
     <div>
      {/* You can open the modal using document.getElementById('ID').showModal() method */}
      
-      <FaEdit className="text-2xl" onClick={openModal}></FaEdit>
+      <FaEdit className="text-2xl text-green-600" onClick={openModal}></FaEdit>
       {isOpen && (
         <dialog id="my_modal_4" className="modal" open>
           <div className="modal-box w-11/12 max-w-5xl">

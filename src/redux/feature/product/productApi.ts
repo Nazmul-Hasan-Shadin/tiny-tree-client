@@ -32,10 +32,14 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["products"],
     }),
     getProductById: builder.query({
-      query: (productId) => ({
-        url: `/products/${productId}`,
-        method: "GET",
-      }),
+      query: (productId) => {
+        console.log(productId);
+        
+        return{
+          url: `/products/${productId}`,
+          method: "GET",
+        }
+      },
     }),
     deleteProduct: builder.mutation({
       query: (id) => {

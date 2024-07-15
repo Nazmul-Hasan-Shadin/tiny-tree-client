@@ -43,7 +43,7 @@ const Cart = () => {
       </a>
     </div>
     <div id="summary" className=" w-full   sm:w-1/4   md:w-1/2     px-8 py-10">
-      <h1 className="font-semibold text-2xl border-b pb-8">Order Summary</h1>
+      <h1 className="font-semibold text-2xl border-b pb-8 text-primary-green">Order Summary</h1>
       <div className="flex justify-between mt-10 mb-5">
         <span className="font-semibold text-sm uppercase">Items 3</span>
         <span className="font-semibold text-sm">590$</span>

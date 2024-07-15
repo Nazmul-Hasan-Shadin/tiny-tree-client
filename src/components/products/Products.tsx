@@ -6,22 +6,25 @@ import Container from "@/container/Container";
 import { FaFilter } from "react-icons/fa";
 import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
 import Search from "../ui/search/Search";
+import { MdCancel } from "react-icons/md";
 import "./search.css";
 
 const Products = () => {
   const [page, setPage] = useState(1);
   const [filterToggle, setFilterToggle] = useState(false);
-  const [filter,setFilter]=useState({priceRange:'',category:''})
+  const [filter, setFilter] = useState({ priceRange: "", category: "" });
 
-  const { data: productData, isLoading, error } = useGetAllProductQuery({page,...filter});
+  const {
+    data: productData,
+    isLoading,
+    error,
+  } = useGetAllProductQuery({ page, ...filter });
 
   const dispatch = useAppDispatch();
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
- console.log(productData);
- 
 
   if (error) {
     return <div>Error fetching products</div>;
@@ -43,26 +46,31 @@ const Products = () => {
     <Container>
       <div>
         <div className="flex justify-between relative  my-8 w-12/12 h-full">
-          <h2 className="text-4xl text-primary-green font-bold pl-11">
+          <h2 className="text-4xl text-primary-green font-bold ">
             Our Products
           </h2>
-          <FaFilter
-            onClick={handleSearchToggle}
-            className="text-4xl text-primary-green font-bold"
-          />
+          {filterToggle ? (
+            <MdCancel className="text-4xl text-red-700"   onClick={handleSearchToggle} />
+          ) : (
+            <FaFilter
+              onClick={handleSearchToggle}
+              className="text-4xl text-primary-green font-bold"
+            />
+          )}
+
           {filterToggle && (
             <div
               className={`${
                 filterToggle ? "slideDown" : ""
               } absolute w-full z-10   top-16`}
             >
-              <Search setFilter={setFilter}/>
+              <Search setFilter={setFilter} />
             </div>
           )}
         </div>
 
         <div
-          className={`grid grid-cols-1  md:grid-cols-3 justify-items-center ${
+          className={`grid grid-cols-1  md:grid-cols-4 justify-items-center ${
             filterToggle ? "mt-28" : "mt-0"
           }`}
         >

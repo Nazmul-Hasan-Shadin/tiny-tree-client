@@ -25,7 +25,7 @@ const AdminNavbar = () => {
             <GiEarthAfricaEurope className="bg-[#F6F7F8] rounded-xl p-2" />
             <span className="relative">
               <SiGmail className="bg-[#F6F7F8]  rounded-xl p-2" />
-              <div className="badge badge-secondary -top-1 text-sm left-7 absolute">
+              <div className="badge bg-green-600 text-white badge-secondary -top-1 text-sm left-7 absolute">
                 +0
               </div>
             </span>

@@ -6,6 +6,7 @@ import MainLayout from "@/components/layout/MainLayout";
 import Cart from "@/pages/Cart/Cart";
 
 import ProductManagement from "@/pages/Dashboard/ProductManagement/ProductManagement";
+import ProductDetails from "@/pages/ProductDetails/ProductDetails";
 
 import { createBrowserRouter } from "react-router-dom";
 
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "/productDetails/:id",
+        element:<ProductDetails/>,
       },
     ],
   },
