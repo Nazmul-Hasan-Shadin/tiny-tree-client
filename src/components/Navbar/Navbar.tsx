@@ -5,10 +5,45 @@ import SubNavbar from "./SubNavbar";
 import NavbarTop from "./NavbarTop";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoMdMenu } from "react-icons/io";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useAppDispatch } from "@/redux/hook";
+import { setHomeFilter, setProductFilter } from "@/redux/feature/product/productSlice";
+import { useLocation } from "react-router-dom";
+const debounce = (func, delay) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func(...args), delay);
+  };
+};
+
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  console.log(location);
+  
+  
+  const handleSearchFilter = useCallback(
+    debounce(() => {
+      if (location.pathname === "/products") {
+        dispatch(setProductFilter({ searchTerm }));
+      } else {
+        dispatch(setHomeFilter({ searchTerm }));
+      }
+    }, 400),
+    [searchTerm, dispatch,location.pathname]
+  );
+  useEffect(() => {
+    handleSearchFilter();
+  }, [searchTerm, handleSearchFilter]);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    handleSearchFilter();
+  };
 
   return (
     <div className="flex flex-col gap-y-3">
@@ -25,7 +60,7 @@ const Navbar = () => {
           {/* searc for medium device */}
           <div className="hidden md:block">
             <label className="input  md:w-10/12 lg:w-[547px] rounded-2xl input-bordered flex items-center gap-56  ">
-              <input type="text" className="grow" placeholder="Search" />
+              <input  onChange={handleSearchChange} type="text" className="grow" placeholder="Search" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"

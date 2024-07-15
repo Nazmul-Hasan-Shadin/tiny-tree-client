@@ -13,7 +13,7 @@ const Products = () => {
   const [page, setPage] = useState(1);
   const [filterToggle, setFilterToggle] = useState(false);
   // const [filter, setFilter] = useState({ priceRange: "", category: "" });
-  const filterState = useAppSelector((state) =>state.filter);
+  const filterState = useAppSelector((state) =>state.filter.homeFilters);
  console.log(filterState);
  
   const {
@@ -73,7 +73,7 @@ const Products = () => {
                 filterToggle ? "slideDown" : ""
               } absolute w-full z-10   top-16`}
             >
-              <Search  />
+              <Search isHomePage={true}  />
             </div>
           )}
         </div>

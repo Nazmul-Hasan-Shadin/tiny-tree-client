@@ -7,6 +7,7 @@ import Products from "@/components/products/Products";
 import Cart from "@/pages/Cart/Cart";
 
 import ProductManagement from "@/pages/Dashboard/ProductManagement/ProductManagement";
+import Product from "@/pages/Product/Product";
 import ProductDetails from "@/pages/ProductDetails/ProductDetails";
 
 import { createBrowserRouter } from "react-router-dom";
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "products",
-        element: <Products/>,
+        element: <Product/>,
       },
       {
         path: "cart",

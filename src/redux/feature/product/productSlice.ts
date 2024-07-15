@@ -1,26 +1,33 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-type FilterState = {
-  category: string ;
-  priceRange: string ;
-  sort:string 
+type Filter = {
+  category?: string;
+  priceRange?: string;
+  sort?: string;
+  searchTerm?: string;
 };
+
+type FilterState = {
+  homeFilters: Filter;
+  productFilters: Filter;
+};
+
 const initialState: FilterState = {
-  category: '',
-  priceRange: '',
-  sort:''
+  homeFilters: { category: "", priceRange: "", sort: "", searchTerm: "" },
+  productFilters: { category: "", priceRange: "", sort: "", searchTerm: "" },
 };
 
 const productSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
-    setFilter: (state, action: PayloadAction<FilterState>) => {
-      state.category = action.payload.category;
-      state.priceRange = action.payload.priceRange;
-      state.sort = action.payload.sort;
+    setHomeFilter: (state, action: PayloadAction<Filter>) => {
+      state.homeFilters = action.payload;
+    },
+    setProductFilter: (state, action: PayloadAction<Filter>) => {
+      state.productFilters = action.payload;
     },
   },
 });
 
-export const {setFilter} = productSlice.actions;
+export const { setHomeFilter, setProductFilter } = productSlice.actions;
 export default productSlice.reducer;

@@ -2,7 +2,8 @@ import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
 import { useCallback, useState } from "react";
 import Button from "../Button/Button";
 import { useAppDispatch } from "@/redux/hook";
-import { setFilter } from "@/redux/feature/product/productSlice";
+import { setHomeFilter, setProductFilter } from "@/redux/feature/product/productSlice";
+
 
 
 const debounce=(func,deley)=>{
@@ -13,7 +14,7 @@ return (...arg)=>{
 }
 }
 
-const Search = ( ) => {
+const Search = ( {isHomePage}) => {
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("");
   const [priceRange,setPriceRange]=useState('')
@@ -24,9 +25,13 @@ const Search = ( ) => {
 
   const handleSearchFilter = useCallback(
     debounce(() => {
-      dispatch(setFilter({ category, sort ,priceRange}));
+      if (isHomePage) {
+        dispatch(setHomeFilter({ category, sort, priceRange }));
+      } else {
+        dispatch(setProductFilter({ category, sort, priceRange }));
+      }
     }, 400),
-    [category, sort, dispatch]
+    [category, sort, dispatch,isHomePage]
   );
 
   return (
