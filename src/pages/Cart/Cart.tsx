@@ -1,5 +1,6 @@
 import CartCard from "@/components/CartCard/CartCard";
 import { useAppSelector } from "@/redux/hook";
+import { Link } from "react-router-dom";
 
 
 const Cart = () => {
@@ -78,9 +79,11 @@ const Cart = () => {
           <span>Total cost</span>
           <span>${price}</span>
         </div>
-        <button className="bg-primary-green font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+      <Link to={'/payment'}>
+      <button className="bg-primary-green font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
               Checkout
             </button>
+      </Link>
       </div>
     </div>
   </div>

@@ -5,10 +5,12 @@ import Dashboard from "@/components/layout/Dashboard";
 import MainLayout from "@/components/layout/MainLayout";
 import Products from "@/components/products/Products";
 import Cart from "@/pages/Cart/Cart";
+import CheckOutForm from "@/pages/CheckoutForm/CheckOutForm";
 
 import ProductManagement from "@/pages/Dashboard/ProductManagement/ProductManagement";
 import Product from "@/pages/Product/Product";
 import ProductDetails from "@/pages/ProductDetails/ProductDetails";
+import Payment from "@/pages/payment/Payment";
 
 import { createBrowserRouter } from "react-router-dom";
 
@@ -29,6 +31,14 @@ export const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "checkout-info",
+        element: <CheckOutForm />,
+      },
+      {
+        path: "payment",
+        element:<Payment></Payment>,
       },
       {
         path: "/productDetails/:id",
