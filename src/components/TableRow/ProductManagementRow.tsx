@@ -1,6 +1,7 @@
 import {  FaTrashAlt } from "react-icons/fa";
 import Modal from "../Modal/Modal";
 import { useDeleteProductMutation } from "@/redux/feature/product/productApi";
+import { toast } from "sonner";
 
 type TProduct = {
   _id?:string;
@@ -22,6 +23,9 @@ const ProductManagementRow = ({ product }:ProductProps) => {
    const [deleteProduct]=useDeleteProductMutation()
   const handleDeleteProduct=(id:string)=>{
        deleteProduct(id)
+       toast.success('item deleted sucessfully')
+   
+      
   }
   return (
     <tr>

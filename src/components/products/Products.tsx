@@ -14,7 +14,7 @@ const Products = () => {
   const [filterToggle, setFilterToggle] = useState(false);
   // const [filter, setFilter] = useState({ priceRange: "", category: "" });
   const filterState = useAppSelector((state) =>state.filter.homeFilters);
- console.log(filterState);
+
  
   const {
     data: productData,

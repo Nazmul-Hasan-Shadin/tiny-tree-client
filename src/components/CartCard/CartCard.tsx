@@ -2,7 +2,7 @@ import { removeCart } from "@/redux/feature/cart/cartSlice";
 import { useAppDispatch } from "@/redux/hook";
 
 const CartCard = ({ cart }) => {
-  console.log(cart);
+
 
   const { title, price, category, description, _id, image } = cart;
   const dispatch = useAppDispatch();

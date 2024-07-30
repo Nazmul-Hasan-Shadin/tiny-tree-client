@@ -1,17 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
  export interface CheckoutState {
-    name: string;
-    email: string;
-    phoneNumber: string;
-    address: string;
+    customerName: string;
+    customerEmail: string;
+    customerPhone: string;
+    customerAddress: string;
   }
 
 const initialState:CheckoutState={
-    name:'',
-    email:'',
-    phoneNumber:'',
-    address:''
+    customerName:'',
+    customerEmail:'',
+    customerPhone:'',
+    customerAddress:''
 }
 
 const checkOutSlice= createSlice({
@@ -19,10 +19,10 @@ const checkOutSlice= createSlice({
     initialState:initialState,
     reducers:{
         setCheckOutData:(state,action:PayloadAction<CheckoutState>)=>{
-            state.name=action.payload.name;
-            state.email=action.payload.email;
-            state.address=action.payload.address;
-            state.phoneNumber=action.payload.phoneNumber;
+            state.customerName=action.payload.customerName;
+            state.customerEmail=action.payload.customerEmail;
+            state.customerAddress=action.payload.customerAddress;
+            state.customerPhone=action.payload.customerPhone;
         }
         }
 

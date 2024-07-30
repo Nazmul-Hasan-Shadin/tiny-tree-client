@@ -23,7 +23,7 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useAppDispatch();
   const location = useLocation();
-  console.log(location);
+
   
   
   const handleSearchFilter = useCallback(
@@ -33,7 +33,7 @@ const Navbar = () => {
       } else {
         dispatch(setHomeFilter({ searchTerm }));
       }
-    }, 400),
+    }, 3000),
     [searchTerm, dispatch,location.pathname]
   );
   useEffect(() => {

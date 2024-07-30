@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button/Button";
 import { useAppDispatch } from "@/redux/hook";
 import { addToCart } from "@/redux/feature/cart/cartSlice";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 const ProductCard = ({ product }) => {
-  const { image, category, price, rating, quantity, description, title } =
-    product;
-       
-    const dispatch= useAppDispatch()
+  const { image, category, price, rating, quantity, description, title } = product;
+    const [selectedQuantity, setSelectedQuantity] = useState(1);
+  
+    
 
-    const handleAddToCart=()=>{
-        dispatch(addToCart(product))
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    if (selectedQuantity <= 0) {
+      toast.error("Quantity must be at least 1");
+      return;
     }
+    dispatch(addToCart({...product ,selectedQuantity}));
+    toast.success("Item added to cart");
+  };
 
+  const truncateText = (text:string, wordLimit:number) => {
+    const words = text.split(' ');
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(' ') + '...';
+    }
+    return text;
+  };
 
   return (
     <div className=" w-full h-full py-5 flex justify-center items-center">
@@ -28,7 +43,7 @@ const ProductCard = ({ product }) => {
             {/* <!-- :src="image.largeImageURL"     --> */}
             <img
               src={image}
-              className="max-h-60 object-cover rounded-t-xl"
+              className="max-h-60 object-cover w-full rounded-t-xl"
               alt=""
             />
             {/* <!-- Tag rekomendasi --> */}
@@ -39,7 +54,7 @@ const ProductCard = ({ product }) => {
           <div className="px-2 py-1 ">
             {/* <!-- Product Title --> */}
             <div className="text-sm md:text-base font-bold pr-2 text-[#054004]">
-              {" "}
+        
               {title}
             </div>
             <div className="flex justify-between  py-2 ">
@@ -70,13 +85,23 @@ const ProductCard = ({ product }) => {
             </div>
 
             <p className="pb-1 md:pb-2 text-xs md:text-sm text-gray-500">
-             {description}
+            {truncateText(description,15)}
             </p>
 
             <div className="flex justify-between">
-             <Button  onClick={handleAddToCart}  className="bg-[#1e531d] " name="Add To Cart"/>
+              <Button
+                onClick={handleAddToCart}
+                className="bg-[#1e531d] "
+                name="Add To Cart"
+              />
 
-            <Link to={`/productDetails/${product._id}`}> <Button  name="Details" className="border-green-500 text-black"/></Link>
+              <Link to={`/productDetails/${product._id}`}>
+                {" "}
+                <Button
+                  name="Details"
+                  className="border-green-500 text-black"
+                />
+              </Link>
             </div>
           </div>
         </div>

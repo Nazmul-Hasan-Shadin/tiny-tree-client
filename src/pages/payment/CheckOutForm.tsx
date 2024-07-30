@@ -1,5 +1,9 @@
 import { removeCart } from "@/redux/feature/cart/cartSlice";
 import { useCreateOrderMutation } from "@/redux/feature/checkout/checkOutApi";
+import {
+  useUpdateProductMutation,
+  useUpdateProductQuantityMutation,
+} from "@/redux/feature/product/productApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
@@ -12,40 +16,43 @@ const CheckOutForm = () => {
   const elements = useElements();
   const cart = useAppSelector((state) => state.cart.products);
   const checkOutInfo = useAppSelector((state) => state.checkout);
-  const [createOrder]=useCreateOrderMutation()
-  const dispatch=useAppDispatch()
+  const [createOrder] = useCreateOrderMutation();
+  const dispatch = useAppDispatch();
 
-  const cartId=cart.map(cart=>cart._id)
-  console.log(cartId);
-  
+  const cartId = cart.map((cart) => cart._id);
 
-  const price = cart.reduce((total, item) => total + item.price!, 0);
+  const [updateProductQuantity] = useUpdateProductQuantityMutation();
+
+  const price = cart.reduce(
+    (total, item) => total + item.price! * item.selectedQuantity!,
+    0
+  );
 
   useEffect(() => {
     const fetchClientSecret = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/v1/payment/create-payment-intent", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ price: price * 100 }), // Convert price to cents
-        });
+        const response = await fetch(
+          "http://localhost:3000/api/v1/payment/create-payment-intent",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ price: price * 100 }), // Convert price to cents
+          }
+        );
         const data = await response.json();
-      
-        
+
         setClientSecret(data.clientSecret);
       } catch (error) {
         console.error("Error fetching client secret:", error);
       }
     };
 
-    fetchClientSecret()
+    fetchClientSecret();
   }, [price]);
 
-  
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
@@ -70,65 +77,70 @@ const CheckOutForm = () => {
       setError("");
     }
 
- 
-    const {paymentIntent,error:confirmError}=await stripe.confirmCardPayment(clientSecret,{
-        payment_method:{
-            card:card,
-            billing_details:{
-                name:'testbro'
-            }
-        }
-    })
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: "testbro",
+          },
+        },
+      });
 
     if (confirmError) {
-        console.log('confirm er',confirmError);
-        
+      console.log("confirm er", confirmError);
+    } else {
+      if (paymentIntent.status === "succeeded") {
+        toast.success(`$ ${price} payment successful`);
+      }
+
+      const productUpdates = cart.map((cart) => ({
+        _id: cart._id,
+        quantity: cart.quantity! - cart.selectedQuantity!,
+      }));
+
+      console.log(productUpdates);
+
+      updateProductQuantity(productUpdates);
+
+      dispatch(removeCart(cartId));
+      createOrder({
+        ...checkOutInfo,
+        transictionId: paymentIntent.id,
+        amount: paymentIntent.amount,
+      });
     }
-    else{
-        console.log(paymentIntent);
-        if(paymentIntent.status==='succeeded'){
-            toast.success(`$ ${price} payment successful`)
-        }  
-        
-        dispatch(removeCart(cartId))  //here how to remove cart product from cart  after scucesufyl mpyament
-
-        createOrder({...checkOutInfo, transictionId:paymentIntent.id,amount:paymentIntent.amount})
-
-
-
-       
-
-
-
-        
-    }
-
-
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <CardElement
-          options={{
-            style: {
-              base: {
-                fontSize: "16px",
-                color: "#424770",
-                "::placeholder": {
-                  color: "#aab7c4",
+    <div className="max-w-lg mx-auto mt-10 p-6 border rounded-md shadow-md bg-white">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: "18px",
+                  color: "#424770",
+                  "::placeholder": {
+                    color: "#aab7c4",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
                 },
               },
-              invalid: {
-                color: "#9e2146",
-              },
-            },
-          }}
-        />
-
-        <button  type="submit" disabled={!stripe || !clientSecret}>
-          Pay
+            }}
+            className="p-3 border rounded-md w-full"
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={!stripe || !clientSecret}
+          className="w-full py-3 px-6 bg-green-600 text-white font-bold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-300 disabled:bg-green-400"
+        >
+          Pay Now
         </button>
-        <p className="text-reds-500"> {error} </p>
+        {error && <p className="text-center text-red-500 mt-2">{error}</p>}
       </form>
     </div>
   );

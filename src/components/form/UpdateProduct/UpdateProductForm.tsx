@@ -11,44 +11,39 @@ interface Inputs {
   price: number;
   quantity: number;
   rating: number;
-  description:string;
+  description: string;
   category: string;
 }
 
-type Product= {
+type Product = {
   _id?: string;
   image: string;
-  description:string;
+  description: string;
   title: string;
   price: number;
   quantity: number;
   rating: number;
   category: string;
-}
+};
 
 interface UpdateProductFormProps {
   product?: Product;
   isUpdate: boolean;
 }
-const UpdateProductForm= ({ product, isUpdate }:UpdateProductFormProps) => {
-  console.log(isUpdate);
-  
-
-
- 
-
+const UpdateProductForm = ({ product, isUpdate }: UpdateProductFormProps) => {
   const { register, handleSubmit } = useForm<Inputs>();
   const [UpdateProduct] = useUpdateProductMutation();
   const [addProduct] = useCreateProductMutation();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (isUpdate && product?._id) {
-       const _id=product._id
+      const _id = product._id;
 
       UpdateProduct({ _id, data });
       toast.success("Succesfully product has updated");
-    }else{
-      addProduct(data)
+    } else {
+      addProduct(data);
+      toast.success("Succesfully product has added");
     }
   };
 
@@ -87,7 +82,7 @@ const UpdateProductForm= ({ product, isUpdate }:UpdateProductFormProps) => {
               <input
                 type="text"
                 {...register("price")}
-                defaultValue={isUpdate? product?.price : ""}
+                defaultValue={isUpdate ? product?.price : ""}
                 className="grow"
                 placeholder="daisy@site.com"
               />
@@ -99,7 +94,7 @@ const UpdateProductForm= ({ product, isUpdate }:UpdateProductFormProps) => {
               <input
                 type="text"
                 {...register("quantity")}
-                defaultValue={isUpdate? product?.quantity : ""}
+                defaultValue={isUpdate ? product?.quantity : ""}
                 className="grow"
                 placeholder="daisy@site.com"
               />
@@ -110,7 +105,7 @@ const UpdateProductForm= ({ product, isUpdate }:UpdateProductFormProps) => {
               rating
               <input
                 type="text"
-                defaultValue={isUpdate? product?.rating : ""}
+                defaultValue={isUpdate ? product?.rating : ""}
                 {...register("rating")}
                 className="grow"
                 placeholder="daisy@site.com"
@@ -122,7 +117,7 @@ const UpdateProductForm= ({ product, isUpdate }:UpdateProductFormProps) => {
               description
               <input
                 type="text"
-                defaultValue={isUpdate? product?.description : ""}
+                defaultValue={isUpdate ? product?.description : ""}
                 {...register("description")}
                 className="grow"
                 placeholder="daisy@site.com"
@@ -138,7 +133,7 @@ const UpdateProductForm= ({ product, isUpdate }:UpdateProductFormProps) => {
               {...register("category")}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             >
-              <option> {isUpdate? product?.category : ""} </option>
+              <option> {isUpdate ? product?.category : ""} </option>
               <option> Fruit </option>
               <option>Flower</option>
               <option> Tree </option>

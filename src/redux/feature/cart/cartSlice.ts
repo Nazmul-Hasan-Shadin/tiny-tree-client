@@ -8,6 +8,7 @@ export type TProduct = {
   quantity: number | null;
   description: string | null;
   rating: number | null;
+  selectedQuantity?:number | null
   image: string | null;
 };
 
@@ -24,7 +25,18 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.products.push(action.payload);
+      
+      const {_id,selectedQuantity}=action.payload
+      const existProduct= state.products.findIndex(product=>product._id ===_id )
+      console.log(existProduct);
+      
+      if (existProduct >=0 ) {
+         state.products[existProduct].selectedQuantity+=selectedQuantity
+      }
+      else{
+        state.products.push(action.payload);
+      }
+     
     },
 
     removeCart: (state, action: PayloadAction<string>) => {

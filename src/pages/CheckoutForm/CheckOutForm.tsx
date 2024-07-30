@@ -2,16 +2,17 @@ import { setCheckOutData } from "@/redux/feature/checkout/checkoutSlice";
 import { useAppDispatch } from "@/redux/hook";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 
 type FormValues = {
-  name: string;
-  email: string;
-  phoneNumber: string;
-  address: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  customerAddress: string;
 };
 
 const CheckOutForm: React.FC = () => {
+  const navigate=useNavigate()
   const {
     register,
     handleSubmit,
@@ -22,6 +23,7 @@ const CheckOutForm: React.FC = () => {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     console.log(data);
     dispatch(setCheckOutData(data));
+    navigate('/payment')
   };
 
   return (
@@ -45,11 +47,11 @@ const CheckOutForm: React.FC = () => {
                 id="name"
                 type="text"
                 placeholder="John Doe"
-                {...register("name", { required: "Name is required" })}
+                {...register("customerName", { required: "Name is required" })}
               />
-              {errors.name && (
+              {errors.customerName && (
                 <p className="text-red-500 text-xs italic">
-                  {errors.name.message}
+                  {errors.customerName.message}
                 </p>
               )}
             </div>
@@ -65,11 +67,11 @@ const CheckOutForm: React.FC = () => {
                 id="email"
                 type="email"
                 placeholder="johndoe@example.com"
-                {...register("email", { required: "Email is required" })}
+                {...register("customerEmail", { required: "Email is required" })}
               />
-              {errors.email && (
+              {errors.customerEmail && (
                 <p className="text-red-500 text-xs italic">
-                  {errors.email.message}
+                  {errors.customerEmail.message}
                 </p>
               )}
             </div>
@@ -85,13 +87,13 @@ const CheckOutForm: React.FC = () => {
                 id="phoneNumber"
                 type="text"
                 placeholder="Phone number"
-                {...register("phoneNumber", {
+                {...register("customerPhone", {
                   required: "Phone number is required",
                 })}
               />
-              {errors.phoneNumber && (
+              {errors.customerPhone && (
                 <p className="text-red-500 text-xs italic">
-                  {errors.phoneNumber.message}
+                  {errors.customerPhone.message}
                 </p>
               )}
             </div>
@@ -106,23 +108,23 @@ const CheckOutForm: React.FC = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="address"
                 placeholder="Enter your address"
-                {...register("address", { required: "Address is required" })}
+                {...register("customerAddress", { required: "Address is required" })}
               />
-              {errors.address && (
+              {errors.customerAddress && (
                 <p className="text-red-500 text-xs italic">
-                  {errors.address.message}
+                  {errors.customerAddress.message}
                 </p>
               )}
             </div>
 
-            <Link to={"/payment"}>
+           
               <button
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Submit
               </button>
-            </Link>
+           
           </form>
         </div>
       </div>

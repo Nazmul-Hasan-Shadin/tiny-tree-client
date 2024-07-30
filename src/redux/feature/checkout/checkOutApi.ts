@@ -5,11 +5,15 @@ import { baseApi } from "@/redux/api/baseApi";
 const paymentApi=baseApi.injectEndpoints({
     endpoints:(builder)=>({
       createOrder:builder.mutation({
-        query:(orderInfo)=>({
-           url:'/create-payment-intent',
-           method:'POST',
-           body:orderInfo
-        })
+        query:(orderInfo)=>{
+         
+          
+         return {
+          url:'/orders',
+          method:'POST',
+          body:orderInfo
+         }
+        }
       })
     } )
 })
