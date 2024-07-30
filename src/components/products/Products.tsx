@@ -51,6 +51,10 @@ const Products = () => {
   return (
     <Container>
       <div>
+        <h2>hi</h2>
+        
+        {/* =========filter section================ */}
+
         <div className="flex justify-between relative  my-8 w-12/12 h-full">
           <h2 className="text-4xl text-primary-green font-bold ">
             Our Products
@@ -77,6 +81,8 @@ const Products = () => {
             </div>
           )}
         </div>
+
+        {/* =====================product section=================== */}
 
         <div
           className={`grid grid-cols-1  md:grid-cols-4 justify-items-center ${

@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "@/redux/hook";
 import { setHomeFilter, setProductFilter } from "@/redux/feature/product/productSlice";
 import { useLocation } from "react-router-dom";
+import { BsCart3 } from "react-icons/bs";
 const debounce = (func, delay) => {
   let timer;
   return (...args) => {
@@ -59,13 +60,13 @@ const Navbar = () => {
           </div>
           {/* searc for medium device */}
           <div className="hidden md:block">
-            <label className="input  md:w-10/12 lg:w-[547px] rounded-2xl input-bordered flex items-center gap-56  ">
-              <input  onChange={handleSearchChange} type="text" className="grow" placeholder="Search" />
+            <label style={{outlineStyle:'none'}} className="input  md:w-10/12 lg:w-[547px] rounded-2xl input-bordered  flex items-center gap-56  ">
+              <input   onChange={handleSearchChange} type="text" className="grow " placeholder="Search" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
                 fill="currentColor"
-                className="h-5 w-5 opacity-70"
+                className="h-5 w-5 opacity- font-bold"
               >
                 <path
                   fillRule="evenodd"
@@ -80,12 +81,12 @@ const Navbar = () => {
             <IoSearchOutline />
           </div>
           {/*  icons  */}
-          <div className=" text-4xl text-[#8ABB54]  flex   items-center gap-3 md:gap-12">
+          <div className=" text-4xl text-green-700  flex   items-center gap-3 md:gap-12">
             <span className="">
               <RxAvatar />
             </span>
             <span>
-              <CiShoppingCart />
+              <CiShoppingCart className="font-bold" />
             </span>
           </div>
         </div>

@@ -43,7 +43,7 @@ const ProductCard = ({ product }) => {
             {/* <!-- :src="image.largeImageURL"     --> */}
             <img
               src={image}
-              className="max-h-60 object-cover w-full rounded-t-xl"
+              className="h-60 object-cover w-full rounded-t-xl"
               alt=""
             />
             {/* <!-- Tag rekomendasi --> */}
@@ -98,8 +98,9 @@ const ProductCard = ({ product }) => {
               <Link to={`/productDetails/${product._id}`}>
                 {" "}
                 <Button
+                 
                   name="Details"
-                  className="border-green-500 text-black"
+                  className="border-green-500 text-green-400 text-black"
                 />
               </Link>
             </div>

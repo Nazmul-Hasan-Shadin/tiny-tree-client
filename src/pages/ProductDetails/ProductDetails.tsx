@@ -8,7 +8,10 @@ const ProductDetails = () => {
   const { id } = useParams();
   const { data: productData,isLoading } = useGetProductByIdQuery(id);
   
+
+   const {quantity,description}=productData?.data;
    console.log(productData);
+   
     
    if (isLoading) {
     return <div>Loading</div>
@@ -52,16 +55,7 @@ const ProductDetails = () => {
             <span className="ml-2 text-gray-600"> {rating} (76 reviews)</span>
           </p>
           <ul className="list-disc pl-5 mb-6">
-            <li className="text-gray-600 text-sm">
-              Breathable support: lightweight knit textile wraps your foot in
-              breathable comfort. Reinforced heel and no-sew overlays lend
-              support and durability.
-            </li>
-            <li className="text-gray-600 text-sm">
-              Lightweight cushioning: soft foam midsole delivers a smooth,
-              stable ride. Its textured outer wall helps reduce weight and hide
-              creases.
-            </li>
+         {description}
           </ul>
           <div className="flex items-center mb-4">
             <label htmlFor="quantity" className="mr-2 text-gray-600 text-sm">
@@ -71,10 +65,7 @@ const ProductDetails = () => {
               id="quantity"
               className="border rounded-md p-2 text-gray-600 text-sm"
             >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
+            <option value=""> {quantity} </option>
             </select>
           </div>
           <button onClick={handleAddToCart} className="bg-primary-green text-white px-4 py-2 rounded-md hover:bg-green-600">

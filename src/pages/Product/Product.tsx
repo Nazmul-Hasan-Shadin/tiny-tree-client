@@ -1,5 +1,6 @@
 import ProductCard from "@/components/ui/productCard";
 import Search from "@/components/ui/search/Search";
+import Container from "@/container/Container";
 import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 
@@ -41,7 +42,8 @@ const Product = () => {
     setFilterToggle(!filterToggle);
   };
   return (
-    <div>
+ <Container>
+      <div>
       <div className="flex justify-between relative  my-8 w-12/12 h-full">
         <h2 className="text-4xl text-primary-green font-bold ">Our Products</h2>
         {filterToggle ? (
@@ -77,6 +79,7 @@ const Product = () => {
         ))}
       </div>
     </div>
+ </Container>
   );
 };
 
