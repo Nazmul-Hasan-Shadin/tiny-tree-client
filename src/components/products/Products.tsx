@@ -51,7 +51,7 @@ const Products = () => {
   return (
     <Container>
       <div>
-        <h2>hi</h2>
+    
         
         {/* =========filter section================ */}
 

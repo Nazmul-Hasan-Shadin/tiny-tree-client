@@ -10,6 +10,7 @@ import { useAppDispatch } from "@/redux/hook";
 import { setHomeFilter, setProductFilter } from "@/redux/feature/product/productSlice";
 import { useLocation } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
+import SearchResult from "../SearchResult/SearchResult";
 const debounce = (func, delay) => {
   let timer;
   return (...args) => {
@@ -34,7 +35,7 @@ const Navbar = () => {
       } else {
         dispatch(setHomeFilter({ searchTerm }));
       }
-    }, 3000),
+    }, 2000),
     [searchTerm, dispatch,location.pathname]
   );
   useEffect(() => {
@@ -59,7 +60,7 @@ const Navbar = () => {
             <img className="  w-40 lg:w-44 md:h-16 " src={logo} alt="" />
           </div>
           {/* searc for medium device */}
-          <div className="hidden md:block">
+          <div className="hidden md:block relative">
             <label style={{outlineStyle:'none'}} className="input  md:w-10/12 lg:w-[547px] rounded-2xl input-bordered  flex items-center gap-56  ">
               <input   onChange={handleSearchChange} type="text" className="grow " placeholder="Search" />
               <svg
@@ -74,8 +75,12 @@ const Navbar = () => {
                   clipRule="evenodd"
                 />
               </svg>
+              { searchTerm && <SearchResult/>}
             </label>
+         
           </div>
+
+        
           {/*  search  for small device */}
           <div className="text-2xl block md:hidden">
             <IoSearchOutline />

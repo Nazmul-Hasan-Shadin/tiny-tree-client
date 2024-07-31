@@ -5,6 +5,8 @@ import { MdCancel } from "react-icons/md";
 import { FaFacebookMessenger } from "react-icons/fa";
 import popUpSound from "../../popupsound.mp3";
 
+
+
 // Initialize socket connection
 const socket = io("http://localhost:3000");
 
@@ -121,7 +123,7 @@ const Chat = () => {
               <input
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
-                className="px-4 py-3 max-w-xs flex-1 border border-gray-300 rounded-lg"
+                className="px-4 py-3 w-full md:max-w-xs flex-1 border border-gray-300 rounded-lg"
                 type="text"
                 placeholder="Send a message..."
               />

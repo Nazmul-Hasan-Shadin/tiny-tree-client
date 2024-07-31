@@ -1,30 +1,28 @@
 import { addToCart } from "@/redux/feature/cart/cartSlice";
 import { useGetProductByIdQuery } from "@/redux/feature/product/productApi";
+
 import { useAppDispatch } from "@/redux/hook";
-import React from "react";
+
 import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { data: productData,isLoading } = useGetProductByIdQuery(id);
-  
 
-   const {quantity,description}=productData?.data;
-   console.log(productData);
-   
-    
-   if (isLoading) {
-    return <div>Loading</div>
-   }
+  const { data: productData, isLoading } = useGetProductByIdQuery(id);
 
-  const {image,title,rating,price}=productData?.data 
-
-  const dispatch= useAppDispatch()
-
-  const handleAddToCart=()=>{
-      dispatch(addToCart(productData))
+  if (isLoading) {
+    return <div>Loading</div>;
   }
+  const { quantity, description } = productData?.data;
+  console.log(productData);
 
+  const { image, title, rating, price } = productData?.data;
+
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(productData));
+  };
 
   return (
     <div className="max-w-6xl mx-auto py-10 px-6">
@@ -32,14 +30,12 @@ const ProductDetails = () => {
         <div className="w-1/2">
           <img
             className="w-full h-full object-cover"
-            src= {image}
+            src={image}
             alt="Product Image"
           />
         </div>
         <div className="w-1/2 p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
-           {title}
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">{title}</h2>
           <p className="text-gray-600 text-sm mb-2">
             Price: <span className="text-red-500 font-bold">$ {price}</span>
           </p>
@@ -54,9 +50,7 @@ const ProductDetails = () => {
             </svg>
             <span className="ml-2 text-gray-600"> {rating} (76 reviews)</span>
           </p>
-          <ul className="list-disc pl-5 mb-6">
-         {description}
-          </ul>
+          <ul className="list-disc pl-5 mb-6">{description}</ul>
           <div className="flex items-center mb-4">
             <label htmlFor="quantity" className="mr-2 text-gray-600 text-sm">
               Quantity:
@@ -65,10 +59,13 @@ const ProductDetails = () => {
               id="quantity"
               className="border rounded-md p-2 text-gray-600 text-sm"
             >
-            <option value=""> {quantity} </option>
+              <option value=""> {quantity} </option>
             </select>
           </div>
-          <button onClick={handleAddToCart} className="bg-primary-green text-white px-4 py-2 rounded-md hover:bg-green-600">
+          <button
+            onClick={handleAddToCart}
+            className="bg-primary-green text-white px-4 py-2 rounded-md hover:bg-green-600"
+          >
             Add to Cart
           </button>
         </div>
