@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Button from "./Button/Button";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { addToCart } from "@/redux/feature/cart/cartSlice";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
-const ProductCard = ({ product }) => {
-  const { image, category, price, rating, quantity, description, title,_id } = product;
-    const [selectedQuantity, setSelectedQuantity] = useState(1);
+export type TProduct = {
+  _id:string,
+  category: string;
+  title: string;
+  price: number;
+  quantity: number;
+  description: string;
+  rating: number;
+  image: string;
+}
+
+ export type TProductProps ={
+  product:TProduct
+ }
+
+
+const ProductCard = ({ product }:TProductProps) => {
+  const { image, price, rating, quantity, description, title,_id } = product;
+    const [selectedQuantity] = useState(1);
    
     const cartProduct=useAppSelector(state=>state.cart.products)
      const totalSelectedQuantity=cartProduct.find(product=>product._id ==_id )?.selectedQuantity 

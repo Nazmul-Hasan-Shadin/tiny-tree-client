@@ -5,22 +5,32 @@ import { useAppDispatch } from "@/redux/hook";
 import { setHomeFilter, setProductFilter } from "@/redux/feature/product/productSlice";
 import { useGetAllCategoriesQuery } from "@/redux/api/categoriesBaseApi";
 
+interface SearchProps {
+  isHomePage: boolean;
+}
 
 
-const debounce=(func,deley)=>{
-  let timer;
-return (...arg)=>{
+interface Category {
+  _id: string;
+  name: string;
+  image?:string
+}
+
+
+const debounce=(func:(...args:any[])=>void,deley:number)=>{
+  let timer:NodeJS.Timeout
+return (...arg:any[])=>{
    clearTimeout(timer)
    timer=setTimeout(()=>func(...arg),deley)
 }
 }
 
-const Search = ( {isHomePage}) => {
+const Search = ( {isHomePage}:SearchProps) => {
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("");
-  const [priceRange,setPriceRange]=useState('')
+  const [priceRange]=useState('')
   
- const {data:allCategory}=useGetAllCategoriesQuery()
+ const {data:allCategory}=useGetAllCategoriesQuery(undefined)
       
   const dispatch=useAppDispatch()
 
@@ -49,7 +59,7 @@ const Search = ( {isHomePage}) => {
               select categories
             </option>
            {
-            allCategory?.data?.map(category=><option key={category?._id}> {category?.name}</option>)
+            allCategory?.data?.map((category:Category)=><option key={category?._id}> {category?.name}</option>)
            }
           </select>
         </div>

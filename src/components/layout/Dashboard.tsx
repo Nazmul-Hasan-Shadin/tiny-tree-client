@@ -1,10 +1,9 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import {
-  FaCartArrowDown,
-  FaCartPlus,
+
   FaHome,
-  FaPlus,
-  FaUsers,
+
+ 
 } from "react-icons/fa";
 
 import { TfiDashboard } from "react-icons/tfi";

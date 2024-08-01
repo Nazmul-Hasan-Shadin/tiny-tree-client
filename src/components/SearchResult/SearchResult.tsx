@@ -1,6 +1,7 @@
 import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
 import { useAppSelector } from "@/redux/hook";
-import React from "react";
+import { TProduct } from "../ui/productCard";
+
 
 const SearchResult = () => {
   const filterState = useAppSelector((state) => state.filter.homeFilters);
@@ -26,7 +27,7 @@ const SearchResult = () => {
   return (
     <div className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-300 shadow-lg z-50 max-h-60 overflow-y-auto">
       <ul>
-        {productData.data.map((product) => (
+        {productData.data.map((product:TProduct) => (
           <div key={product._id}>
      <a href="#products">
      <div className="flex gap-3 items-center">

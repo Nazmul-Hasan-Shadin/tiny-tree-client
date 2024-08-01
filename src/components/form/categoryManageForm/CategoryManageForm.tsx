@@ -1,6 +1,6 @@
 import {
   useCreateCategoriesMutation,
-  useCreateCategoriesQuery,
+
   useDeleteCategoriesMutation,
   useGetAllCategoriesQuery,
   useUpdateCategoriesMutation,
@@ -14,6 +14,13 @@ interface CategoryFormInputs {
   image:string
 }
 
+export interface TCategory {
+  name: string;
+  image:string;
+  _id:string
+}
+
+
 const CategoryForm: React.FC = () => {
   const { register, handleSubmit, reset, setValue } =
     useForm<CategoryFormInputs>();
@@ -26,7 +33,7 @@ const CategoryForm: React.FC = () => {
   useEffect(() => {
     if (selectedCategory && categories) {
       const category = categories?.data.find(
-        (cat) => cat._id === selectedCategory
+        (cat:TCategory) => cat._id === selectedCategory
       );
       if (category) {
         setValue("name", category.name);

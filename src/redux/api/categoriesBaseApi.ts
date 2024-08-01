@@ -1,5 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+
+export interface Category {
+  _id: string
+  name: string;
+  image: string;
+}
+
+export interface CreateCategoryRequest {
+  name: string;
+  image: string;
+}
+
+export interface UpdateCategoryRequest {
+  name?: string;
+  image?: string;
+}
+
 export const categoryBaseApi = createApi({
   reducerPath: "categoryBaseApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/api/v1" }),

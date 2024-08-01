@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react";
-import imaged from "../../assets";
 
-const CategoryCard = ({ category }) => {
+ type TCategory={
+    image:string;
+    name:string
+ }
+
+ type CategoryCardProps = {
+  category: TCategory;
+};
+
+const CategoryCard = ({ category}:CategoryCardProps) => {
   const { image, name } = category;
 
 

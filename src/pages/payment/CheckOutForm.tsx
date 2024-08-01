@@ -71,7 +71,7 @@ const CheckOutForm = () => {
 
     if (error) {
       console.log("[error]", error);
-      setError(error.message);
+      setError(error.message || "An error occurred while creating the payment method.");
     } else {
       console.log("[PaymentMethod]", paymentMethod);
       setError("");

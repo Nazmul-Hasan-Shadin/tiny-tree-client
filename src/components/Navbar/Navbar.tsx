@@ -10,11 +10,11 @@ import { setHomeFilter, setProductFilter } from "@/redux/feature/product/product
 import { Link, useLocation } from "react-router-dom";
 import SearchResult from "../SearchResult/SearchResult";
 
-const debounce = (func, delay) => {
-  let timer;
-  return (...args) => {
+const debounce = (func:(...args:any[])=>void,deley:number) => {
+  let timer:NodeJS.Timeout;
+  return (...args:any[]) => {
     clearTimeout(timer);
-    timer = setTimeout(() => func(...args), delay);
+    timer = setTimeout(() => func(...args), deley);
   };
 };
 

@@ -25,7 +25,7 @@ const Products = () => {
 
 
 
-  const dispatch = useAppDispatch();
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -88,7 +88,7 @@ const Products = () => {
             filterToggle ? "mt-28" : "mt-0"
           }`}
         >
-          {productData?.data?.map((product) => (
+          {productData?.data?.map((product:any) => (
             <ProductCard product={product} key={product?._id} />
           ))}
         </div>

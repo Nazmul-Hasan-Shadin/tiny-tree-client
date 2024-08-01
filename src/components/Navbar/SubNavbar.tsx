@@ -2,7 +2,12 @@ import './SubNavlink.css'
 import { MdOutlineCancel } from "react-icons/md";
 import "./subnavAnimation.css";
 import { Link, NavLink } from "react-router-dom";
-const SubNavbar = ({ setShowNav, showNav }) => {
+
+type SubNavbarProps = {
+  setShowNav?: React.Dispatch<React.SetStateAction<boolean>>; 
+  showNav?: boolean; 
+};
+const SubNavbar = ({ setShowNav, showNav }:SubNavbarProps) => {
   const links = (
     <>
       <NavLink to={'/'}>
@@ -33,7 +38,7 @@ const SubNavbar = ({ setShowNav, showNav }) => {
         </div>
         <ul className="flex    flex-col md:flex  w-full lg:flex  md:w-full lg:flex-row gap-2 lg:gap-16 pl-7 lg:pl-[87px]">
           <MdOutlineCancel
-            onClick={() => setShowNav(!showNav)}
+            onClick={() =>  setShowNav &&  setShowNav(!showNav)}
             className={`absolute lg:hidden right-3 top-5 text-xl   `}
           />
           {links}
