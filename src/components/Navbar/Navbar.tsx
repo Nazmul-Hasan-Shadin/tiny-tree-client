@@ -3,14 +3,13 @@ import { CiShoppingCart } from "react-icons/ci";
 import logo from "@/assets/icons/logo.webp";
 import SubNavbar from "./SubNavbar";
 import NavbarTop from "./NavbarTop";
-import { IoSearchOutline } from "react-icons/io5";
 import { IoMdMenu } from "react-icons/io";
 import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { setHomeFilter, setProductFilter } from "@/redux/feature/product/productSlice";
 import { Link, useLocation } from "react-router-dom";
-import { BsCart3 } from "react-icons/bs";
 import SearchResult from "../SearchResult/SearchResult";
+
 const debounce = (func, delay) => {
   let timer;
   return (...args) => {

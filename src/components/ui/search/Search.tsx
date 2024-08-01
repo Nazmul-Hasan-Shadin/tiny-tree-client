@@ -1,4 +1,4 @@
-import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
+
 import { useCallback, useState } from "react";
 import Button from "../Button/Button";
 import { useAppDispatch } from "@/redux/hook";

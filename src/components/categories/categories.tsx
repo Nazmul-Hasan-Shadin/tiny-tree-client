@@ -13,7 +13,7 @@ const Categories = () => {
   const { data: categories } = useGetAllCategoriesQuery();
 
   return (
-    <div>
+    <div  data-aos="fade-up">
       <Container>
         <div className="space-y-9">
           <HeaderTitile header={"Our Category"} />

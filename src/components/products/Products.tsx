@@ -51,7 +51,7 @@ const Products = () => {
 
   return (
     <Container>
-      <div>
+      <div id="products"   data-aos-duration="800" data-aos="fade-up">
     
         
         {/* =========filter section================ */}

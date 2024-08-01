@@ -4,7 +4,7 @@ import React from "react";
 
 const SearchResult = () => {
   const filterState = useAppSelector((state) => state.filter.homeFilters);
-  
+
   const {
     data: productData,
     isLoading,
@@ -27,9 +27,17 @@ const SearchResult = () => {
     <div className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-300 shadow-lg z-50 max-h-60 overflow-y-auto">
       <ul>
         {productData.data.map((product) => (
-          <li key={product._id} className="p-2 hover:bg-gray-100 cursor-pointer">
-            {product.title}
-          </li>
+          <div key={product._id}>
+     <a href="#products">
+     <div className="flex gap-3 items-center">
+              <span className="p-2 hover:bg-gray-100 cursor-pointer">
+                {" "}
+                {product.title}
+              </span>
+              <img className="w-6 h-6 rounded-lg" src={product?.image} alt="" />
+            </div>
+     </a>
+          </div>
         ))}
       </ul>
     </div>
