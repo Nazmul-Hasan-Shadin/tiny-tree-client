@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 import Button from "./Button/Button";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { addToCart } from "@/redux/feature/cart/cartSlice";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const ProductCard = ({ product }) => {
-  const { image, category, price, rating, quantity, description, title } = product;
+  const { image, category, price, rating, quantity, description, title,_id } = product;
     const [selectedQuantity, setSelectedQuantity] = useState(1);
-  
+   
+    const cartProduct=useAppSelector(state=>state.cart.products)
+     const totalSelectedQuantity=cartProduct.find(product=>product._id ==_id )?.selectedQuantity 
+    
     
 
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
+     if ( totalSelectedQuantity && totalSelectedQuantity > quantity-1) {
+       toast.error('Product is not available in stock')
+       return
+     }
     if (selectedQuantity <= 0) {
       toast.error("Quantity must be at least 1");
       return;
@@ -23,7 +30,7 @@ const ProductCard = ({ product }) => {
   };
 
   const truncateText = (text:string, wordLimit:number) => {
-    const words = text.split(' ');
+    const words = text?.split(' ');
     if (words.length > wordLimit) {
       return words.slice(0, wordLimit).join(' ') + '...';
     }
@@ -74,10 +81,10 @@ const ProductCard = ({ product }) => {
                   </svg>
                   {/* <!-- Rating total --> */}
                   <p className="text-gray-600 font-bold text-xs md:text-sm ml-1">
-                    4.96
+                  {rating}
                     {/* <!-- Jumlah review --> */}
                     <span className="text-gray-500 font-normal">
-                      (76 rewiews)
+                     
                     </span>
                   </p>
                 </div>

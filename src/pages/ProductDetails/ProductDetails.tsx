@@ -4,6 +4,7 @@ import { useGetProductByIdQuery } from "@/redux/feature/product/productApi";
 import { useAppDispatch } from "@/redux/hook";
 
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const ProductDetails = () => {
 
   const handleAddToCart = () => {
     dispatch(addToCart(productData));
+    toast.success('Product has added to cart')
   };
 
   return (
@@ -55,12 +57,7 @@ const ProductDetails = () => {
             <label htmlFor="quantity" className="mr-2 text-gray-600 text-sm">
               Quantity:
             </label>
-            <select
-              id="quantity"
-              className="border rounded-md p-2 text-gray-600 text-sm"
-            >
-              <option value=""> {quantity} </option>
-            </select>
+           {quantity}
           </div>
           <button
             onClick={handleAddToCart}

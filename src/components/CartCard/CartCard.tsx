@@ -1,18 +1,25 @@
 import { removeCart } from "@/redux/feature/cart/cartSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 
 const CartCard = ({ cart }) => {
-
-
-  const { title, price, category, description, _id, image } = cart;
+  const { title, price, category, description, _id, image, rating } = cart;
   const dispatch = useAppDispatch();
+
+  const products = useAppSelector((state) => state.cart.products);
+
+  const SelectedQuantityOFProduct = products.find(
+    (product) => product._id === _id
+  )?.selectedQuantity;
 
   const handleRemoveCart = () => {
     dispatch(removeCart(_id));
   };
 
   const truncateDescription = (desc, wordLimit) => {
-    return desc.split(" ").slice(0, wordLimit).join(" ") + (desc.split(" ").length > wordLimit ? "..." : "");
+    return (
+      desc.split(" ").slice(0, wordLimit).join(" ") +
+      (desc.split(" ").length > wordLimit ? "..." : "")
+    );
   };
 
   return (
@@ -30,35 +37,24 @@ const CartCard = ({ cart }) => {
         />
       </div>
       <div className="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-        <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">RF293</p>
         <div className="flex items-center justify-between w-full">
-          <p className="text-base font-black leading-none text-gray-800">
-            {" "}
-            {title}{" "}
-          </p>
-          {/* <select
-            aria-label="Select quantity"
-            className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none"
-          >
-            <option>01</option>
-            <option>02</option>
-            <option>03</option>
-          </select> */}
+          <p className="text-base font-black leading-none "> {title} </p>
         </div>
-        <p className="text-xs leading-3 text-gray-600 pt-2">
-          Height: 10 inches
+        <p className="text-md pt-2">quantity: {SelectedQuantityOFProduct}</p>
+        <p className="text-xs   py-4">Rating: {rating}</p>
+        <p className="w-96 text-xs  text-gray-600">
+          {" "}
+          {truncateDescription(description, 16)}{" "}
         </p>
-        <p className="text-xs leading-3 text-gray-600 py-4">Color: Black</p>
-        <p className="w-96 text-xs leading-3 text-gray-600"> {truncateDescription(description,16)} </p>
         <div className="flex items-center justify-between pt-5">
           <div className="flex itemms-center">
-            <p className="text-xs leading-3 underline text-gray-800 cursor-pointer">
+            <p className="text-xs  underline text-gray-800 cursor-pointer">
               Add to favorites
             </p>
 
             <p
               onClick={handleRemoveCart}
-              className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
+              className="text-xs underline text-red-500 pl-5 cursor-pointer"
             >
               Remove
             </p>
