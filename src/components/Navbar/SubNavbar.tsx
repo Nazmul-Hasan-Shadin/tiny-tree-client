@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { MdCancel } from "react-icons/md";
+import './SubNavlink.css'
 import { MdOutlineCancel } from "react-icons/md";
 import "./subnavAnimation.css";
 import { Link, NavLink } from "react-router-dom";
@@ -7,18 +6,18 @@ const SubNavbar = ({ setShowNav, showNav }) => {
   const links = (
     <>
       <NavLink to={'/'}>
-        <li className="p-2 md:p-0 md:bg-none ">Home</li>
+        <li className="p-2 md:p-0 md:bg-none nav-link ">Home</li>
       </NavLink>
-       <Link to={'/'}><li className=" p-2 md:p-0 md:bg-none ">Shop</li></Link>
-       <Link to={'/cart'}>  <li className=" p-2 md:p-0 md:bg-none ">Cart</li></Link>
-   <Link to={'/products'}>   <li className=" p-2 md:p-0 md:bg-none ">Products</li></Link>
-    <Link to={'/dashboard'}>  <li className=" p-2 md:p-0 md:bg-none ">Dashboard</li></Link>
+       <Link to={'/'}><li className=" p-2 md:p-0 md:bg-none nav-link ">Shop</li></Link>
+       <Link to={'/cart'}>  <li className=" p-2 md:p-0 md:bg-none  nav-link">Cart</li></Link>
+   <Link to={'/products'}>   <li className=" p-2 md:p-0 md:bg-none nav-link ">Products</li></Link>
+    <Link to={'/dashboard'}>  <li className=" p-2 md:p-0 md:bg-none nav-link ">Dashboard</li></Link>
     </>
   );
 
   return (
     <div
-      className={`  fixed top-0  h-full w-11/12 md:w-  md:pb-3 md:pt-2 md:relative   font-bold  z-20 bg-[#fff]   ${
+      className={`  fixed top-0   h-full w-11/12 md:w-  md:pb-3 md:pt-2 md:relative   font-bold  z-20 bg-[#fff]   ${
         showNav ? "slide-in " : ""
       } `}
       style={{ boxShadow: "rgb(0 0 0 / 20%) 0px 4px 5px" }}

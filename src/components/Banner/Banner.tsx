@@ -9,7 +9,7 @@ import banner3 from "@/assets/images/saveEarth1.jpg";
 
 const Banner = () => {
   return (
-    <div>
+    <div className="mt-2 md:mt-0">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

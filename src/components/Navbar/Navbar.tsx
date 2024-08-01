@@ -6,9 +6,9 @@ import NavbarTop from "./NavbarTop";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoMdMenu } from "react-icons/io";
 import { useCallback, useEffect, useState } from "react";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { setHomeFilter, setProductFilter } from "@/redux/feature/product/productSlice";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
 import SearchResult from "../SearchResult/SearchResult";
 const debounce = (func, delay) => {
@@ -23,9 +23,11 @@ const debounce = (func, delay) => {
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showSearchbar,setShowSearcbar]=useState(false)
   const dispatch = useAppDispatch();
   const location = useLocation();
 
+  const cart= useAppSelector(state=>state.cart.products)
   
   
   const handleSearchFilter = useCallback(
@@ -47,6 +49,10 @@ const Navbar = () => {
     handleSearchFilter();
   };
 
+  const handleSearchShow=()=>{
+       setShowSearcbar(!showSearchbar)
+  }
+
   return (
     <div className="flex flex-col gap-y-3">
       <NavbarTop></NavbarTop>
@@ -57,17 +63,17 @@ const Navbar = () => {
               onClick={() => setShowNav(!showNav)}
               className="block md:block lg:hidden text-2xl"
             />
-            <img className="  w-40 lg:w-44 md:h-16 " src={logo} alt="" />
+            <img className="  hidden md:block lg:w-44 md:h-16 " src={logo} alt="" />
           </div>
           {/* searc for medium device */}
-          <div className="hidden md:block relative">
-            <label style={{outlineStyle:'none'}} className="input  md:w-10/12 lg:w-[547px] rounded-2xl input-bordered  flex items-center gap-56  ">
+          <div className=" md:block relative">
+            <label style={{outlineStyle:'none'}} className="input  w-full  md:w-10/12 lg:w-[547px] rounded-2xl input-bordered  flex items-center gap-56  ">
               <input   onChange={handleSearchChange} type="text" className="grow " placeholder="Search" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
                 fill="currentColor"
-                className="h-5 w-5 opacity- font-bold"
+                className="h-5 w-5 opacity- font-bold hidden"
               >
                 <path
                   fillRule="evenodd"
@@ -80,18 +86,18 @@ const Navbar = () => {
          
           </div>
 
-        
-          {/*  search  for small device */}
-          <div className="text-2xl block md:hidden">
-            <IoSearchOutline />
-          </div>
-          {/*  icons  */}
-          <div className=" text-4xl text-green-700  flex   items-center gap-3 md:gap-12">
+    {/* ==============icon list===================== */}
+          <div className=" text-3xl md:text-4xl text-green-700  flex   items-center gap-3 md:gap-12">
             <span className="">
               <RxAvatar />
             </span>
             <span>
-              <CiShoppingCart className="font-bold" />
+        
+          <span className="relaive ">
+            <div className="absolute inline  h-4 w-4 rounded-full bg-primary-green text-xs text-center text-white">{cart.length}</div>
+         <Link to={'/cart'}> <CiShoppingCart  className="font-bold" /></Link>
+          </span>
+        
             </span>
           </div>
         </div>

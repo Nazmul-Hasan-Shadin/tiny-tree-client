@@ -8,6 +8,7 @@ import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
 import Search from "../ui/search/Search";
 import { MdCancel } from "react-icons/md";
 import "./search.css";
+import HeaderTitile from "../ui/HeaderTitle/HeaderTitile";
 
 const Products = () => {
   const [page, setPage] = useState(1);
@@ -56,9 +57,7 @@ const Products = () => {
         {/* =========filter section================ */}
 
         <div className="flex justify-between relative  my-8 w-12/12 h-full">
-          <h2 className="text-4xl text-primary-green font-bold ">
-            Our Products
-          </h2>
+         <HeaderTitile header={'Our Products'}></HeaderTitile>
           {filterToggle ? (
             <MdCancel
               className="text-4xl text-red-700"
@@ -67,7 +66,7 @@ const Products = () => {
           ) : (
             <FaFilter
               onClick={handleSearchToggle}
-              className="text-4xl text-primary-green font-bold"
+              className="text-3xl md:text-4xl text-primary-green font-bold"
             />
           )}
 
@@ -85,7 +84,7 @@ const Products = () => {
         {/* =====================product section=================== */}
 
         <div
-          className={`grid grid-cols-1  md:grid-cols-4 justify-items-center ${
+          className={`grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 justify-items-center ${
             filterToggle ? "mt-28" : "mt-0"
           }`}
         >
@@ -94,7 +93,7 @@ const Products = () => {
           ))}
         </div>
       </div>
-      <div className="flex justify-end gap-3">
+      <div className="flex justify-end gap-3 mt-4">
         <button
           onClick={handlePrevPage}
           className="inset-x-0 bottom-0 flex justify-center bg-[#1e531d] font-bold hover:bg-white text-sm md:text-base border hover:border-2 hover:border-blue-500 rounded-xl w-14 md:w-24 p-1 text-gray-100 hover:text-blue-900"

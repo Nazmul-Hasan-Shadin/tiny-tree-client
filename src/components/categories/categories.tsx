@@ -1,38 +1,29 @@
-import { useEffect, useState } from "react";
-import categorieData from "../../../public/categories.json";
+
 import CategoryCard from "../ui/CategoryCar";
 import Container from "@/container/Container";
+import HeaderTitile from "../ui/HeaderTitle/HeaderTitile";
+import { useGetAllCategoriesQuery } from "@/redux/api/categoriesBaseApi";
 
 interface Category {
-    name: string;
-    image: string;
-  }
+  name: string;
+  image: string;
+}
 
 const Categories = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const { data: categories } = useGetAllCategoriesQuery();
 
-
-  useEffect(() => {
-    // Directly use the imported JSON data
-    setCategories(categorieData.categories);
-  }, []);
-
- 
   return (
-    <div>k
-      <Container >
-      <div className="space-y-9">
-        <h3 className="text-4xl text-primary-green font-bold  ">Our Categories</h3>
-         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-items-center gap-3">
-            {
-                categories.map((category,index)=>{
-                    return <CategoryCard key={index} category={category}/>
-                })
-            }
+    <div>
+      <Container>
+        <div className="space-y-9">
+          <HeaderTitile header={"Our Category"} />
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-items-center gap-3">
+            {categories?.data?.map((category, index) => {
+              return <CategoryCard key={index} category={category} />;
+            })}
+          </div>
         </div>
-        
-      </div>
       </Container>
     </div>
   );

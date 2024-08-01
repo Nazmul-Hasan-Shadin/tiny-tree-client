@@ -11,6 +11,10 @@ const CartCard = ({ cart }) => {
     dispatch(removeCart(_id));
   };
 
+  const truncateDescription = (desc, wordLimit) => {
+    return desc.split(" ").slice(0, wordLimit).join(" ") + (desc.split(" ").length > wordLimit ? "..." : "");
+  };
+
   return (
     <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
       <div className="md:w-4/12 2xl:w-1/4 w-full">
@@ -32,20 +36,20 @@ const CartCard = ({ cart }) => {
             {" "}
             {title}{" "}
           </p>
-          <select
+          {/* <select
             aria-label="Select quantity"
             className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none"
           >
             <option>01</option>
             <option>02</option>
             <option>03</option>
-          </select>
+          </select> */}
         </div>
         <p className="text-xs leading-3 text-gray-600 pt-2">
           Height: 10 inches
         </p>
         <p className="text-xs leading-3 text-gray-600 py-4">Color: Black</p>
-        <p className="w-96 text-xs leading-3 text-gray-600"> {description} </p>
+        <p className="w-96 text-xs leading-3 text-gray-600"> {truncateDescription(description,16)} </p>
         <div className="flex items-center justify-between pt-5">
           <div className="flex itemms-center">
             <p className="text-xs leading-3 underline text-gray-800 cursor-pointer">
@@ -59,9 +63,9 @@ const CartCard = ({ cart }) => {
               Remove
             </p>
           </div>
-          <p className="text-base font-black leading-none text-gray-800">
+          {/* <p className="text-base font-black leading-none text-gray-800">
             ,000
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

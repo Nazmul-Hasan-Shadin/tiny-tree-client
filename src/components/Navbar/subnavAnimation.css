@@ -25,3 +25,27 @@
 .slide-out {
   animation: slideOut 1s ease-in-out backwards;
 }
+
+
+
+.nav-link{
+  position: relative;
+  padding-bottom: 3px;
+  
+}
+
+.nav-link::after{
+  content: ' ';
+  background-color: #054004;
+  height: 3px;
+  width: 0px;
+  position: absolute;
+  left: 0;
+  bottom:0;
+  transition: width 0.4s ease-in-out;
+
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}

@@ -4,6 +4,7 @@ import { baseApi } from "./api/baseApi";
 import cartSlice from "./feature/cart/cartSlice";
 import productSlice from "./feature/product/productSlice";
 import checkoutSlice from "./feature/checkout/checkoutSlice";
+import { categoryBaseApi } from "./api/categoriesBaseApi";
 
 export const store = configureStore({
   reducer: {
@@ -12,10 +13,13 @@ export const store = configureStore({
     filter: productSlice,
     checkout:checkoutSlice,
     [baseApi.reducerPath]: baseApi.reducer,
+    [categoryBaseApi.reducerPath]:categoryBaseApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware),
+    getDefaultMiddleware().concat(baseApi.middleware).concat(categoryBaseApi.middleware),
+
 });
+
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

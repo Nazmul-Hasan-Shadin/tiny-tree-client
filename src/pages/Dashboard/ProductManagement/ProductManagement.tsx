@@ -28,7 +28,7 @@ const ProductManagement = () => {
       <div className="flex bg-[#FFFFFF] lg:p-12  justify-between">
         <form onSubmit={(e) => e.preventDefault()} className="p-3" action="">
           <div className="flex gap-3 lg:gap-5 items-center">
-            <FaFilter className="text-5xl p-1 rounded-md bg-[#FF9F43]" />
+            <FaFilter className="text-5xl p-1 rounded-md  text-green-900" />
           </div>
         </form>
 

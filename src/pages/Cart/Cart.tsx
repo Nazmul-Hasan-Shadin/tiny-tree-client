@@ -71,7 +71,7 @@ const Cart = () => {
               className="p-2 text-sm w-full"
             />
           </div>
-          <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
+          <button className="bg-green-800 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
             Apply
           </button>
           <div className="border-t mt-8">

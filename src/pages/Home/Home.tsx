@@ -1,20 +1,21 @@
-import Banner from '@/components/Banner/Banner';
-import Navbar from '@/components/Navbar/Navbar';
-import Categories from '@/components/categories/categories';
-import Products from '@/components/products/Products';
-import React from 'react';
-import Footer from '../Footer/Footer';
+import Banner from "@/components/Banner/Banner";
+
+import Categories from "@/components/categories/categories";
+import Products from "@/components/products/Products";
+
+import Footer from "../Footer/Footer";
+import Gallery from "@/components/Gallery/Gallery";
 
 const Home = () => {
-    return (
-        <div>
-           
-            <Banner/>
-            <Categories/>
-            <Products/>
-            <Footer></Footer>
-        </div>
-    );
+  return (
+    <div>
+      <Banner />
+      <Categories />
+      <Products />
+      <Gallery/>
+      <Footer></Footer>
+    </div>
+  );
 };
 
 export default Home;

@@ -72,7 +72,11 @@ const Dashboard = () => {
                     <Link to={"/dashboard"}>
                        <TfiDashboard/>
                       Dashboad
-                    </Link>{" "}
+                    </Link>
+                    <Link to={"/dashboard/category"}>
+                       <TfiDashboard/>
+                      Manage Category
+                    </Link>
 
                     <Link to={"/"}>
                       <FaHome></FaHome>

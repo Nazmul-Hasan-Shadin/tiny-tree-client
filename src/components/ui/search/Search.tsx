@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import Button from "../Button/Button";
 import { useAppDispatch } from "@/redux/hook";
 import { setHomeFilter, setProductFilter } from "@/redux/feature/product/productSlice";
+import { useGetAllCategoriesQuery } from "@/redux/api/categoriesBaseApi";
 
 
 
@@ -19,6 +20,7 @@ const Search = ( {isHomePage}) => {
   const [sort, setSort] = useState("");
   const [priceRange,setPriceRange]=useState('')
   
+ const {data:allCategory}=useGetAllCategoriesQuery()
       
   const dispatch=useAppDispatch()
 
@@ -46,9 +48,9 @@ const Search = ( {isHomePage}) => {
             <option disabled selected>
               select categories
             </option>
-            <option> orange </option>
-            <option>electronics</option>
-            <option> mal</option>
+           {
+            allCategory?.data?.map(category=><option key={category?._id}> {category?.name}</option>)
+           }
           </select>
         </div>
         <div className="w-full">

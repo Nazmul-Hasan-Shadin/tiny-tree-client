@@ -76,7 +76,7 @@ const Chat = () => {
   return (
     <>
       {isVisible ? ( // Render chat only if isVisible is true
-        <div className="z-50 fixed bottom-1 right-1 md:right-1 md:bottom-1 h-[384px] md:w-3/12  max-w-lg border border-red-400 bg-white flex flex-col shadow-lg">
+        <div className="z-50 fixed bottom-1 right-1 md:right-1 md:bottom-1 h-[384px] w-4/6 md:w-3/12  max-w-lg border border-red-400 bg-white flex flex-col shadow-lg">
           {/* Profile image and cancel icon */}
           <div className="relative flex items-center p-4 bg-primary-green">
             <img

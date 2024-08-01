@@ -1,5 +1,6 @@
 import App from "@/App";
 import UpdateProductForm from "@/components/form/UpdateProduct/UpdateProductForm";
+import CategoryForm from "@/components/form/categoryManageForm/CategoryManageForm";
 import Dashboard from "@/components/layout/Dashboard";
 
 import MainLayout from "@/components/layout/MainLayout";
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: "add-product",
         element: <UpdateProductForm isUpdate={false} />,
+      },
+      {
+        path: "category",
+        element: <CategoryForm />,
       },
     ],
   },
