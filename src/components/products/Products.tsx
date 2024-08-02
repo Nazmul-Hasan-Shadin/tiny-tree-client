@@ -23,8 +23,8 @@ const Products = () => {
     error,
   } = useGetAllProductQuery({ page, ...filterState });
 
-
-
+ console.log(productData);
+ 
 
 
   if (isLoading) {

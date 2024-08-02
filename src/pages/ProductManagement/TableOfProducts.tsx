@@ -3,6 +3,8 @@ import { useGetAllProductQuery } from "@/redux/feature/product/productApi";
 
 const ProductTables = () => {
   const { data: productData } = useGetAllProductQuery({});
+  console.log(productData);
+  
 
   return (
     <div className="overflow-x-auto">
