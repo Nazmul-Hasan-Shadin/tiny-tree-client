@@ -2,6 +2,7 @@ import {  FaTrashAlt } from "react-icons/fa";
 import Modal from "../Modal/Modal";
 import { useDeleteProductMutation } from "@/redux/feature/product/productApi";
 import { toast } from "sonner";
+import Swal from 'sweetalert2'
 
 type TProduct = {
   _id?:string;
@@ -22,8 +23,29 @@ const ProductManagementRow = ({ product }:ProductProps) => {
 
    const [deleteProduct]=useDeleteProductMutation()
   const handleDeleteProduct=(id:string)=>{
-       deleteProduct(id)
-       toast.success('item deleted sucessfully')
+    
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(id)
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+
+    
+     
+      
    
       
   }

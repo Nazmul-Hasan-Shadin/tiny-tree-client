@@ -7,10 +7,14 @@ import popUpSound from "../../popupsound.mp3";
 
 
 
+
 // Initialize socket connection
-const socket = io("http://localhost:3000");
+// 
+  // const socket = io("http://localhost:3000");
+  // 
 
 const Chat = () => {
+  const socket = io("https://tiny-tree-server.vercel.app");
   const [msg, setMsg] = useState("");
   const [chat, setChat] = useState<
     {
