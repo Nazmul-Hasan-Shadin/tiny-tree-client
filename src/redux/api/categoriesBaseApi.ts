@@ -19,7 +19,7 @@ export interface UpdateCategoryRequest {
 
 export const categoryBaseApi = createApi({
   reducerPath: "categoryBaseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://tiny-tree-server.vercel.app/api/v1" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://tiny-tree-server-8.onrender.com/api/v1" }),
   endpoints: (builder) => ({
     createCategories: builder.mutation({
       query: (data) => {

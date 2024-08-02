@@ -14,7 +14,7 @@ import popUpSound from "../../popupsound.mp3";
   // 
 
 const Chat = () => {
-  const socket = io("https://tiny-tree-server.vercel.app");
+  const socket = io("https://tiny-tree-server-8.onrender.com");
   const [msg, setMsg] = useState("");
   const [chat, setChat] = useState<
     {

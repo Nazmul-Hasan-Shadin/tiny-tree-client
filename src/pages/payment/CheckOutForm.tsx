@@ -32,7 +32,7 @@ const CheckOutForm = () => {
     const fetchClientSecret = async () => {
       try {
         const response = await fetch(
-          "https://tiny-tree-server.vercel.app/api/v1/payment/create-payment-intent",
+          "https://tiny-tree-server-8.onrender.com/api/v1/payment/create-payment-intent",
           {
             method: "POST",
             headers: {
